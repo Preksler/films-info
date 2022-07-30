@@ -25,6 +25,7 @@ export const Button = styled.button`
     font-size: 16px;
     font-weight: 500;
     cursor: pointer;
+    transition: transform 0.1s ease-in-out;
     &:hover {
         transform: scale(1.1);
     }
