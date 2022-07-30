@@ -9,11 +9,15 @@ const Cast = () => {
     const { movieId } = useParams();
 
     useEffect(() => {
-        try {
-            getCredits(movieId).then(movie => setMovie(movie));
-        } catch (error) {
-            console.log(error);
+        async function getMovieCast() {
+            try {
+                const movie = await getCredits(movieId);
+                setMovie(movie);
+            } catch (error) {
+                console.log(error);
+            }
         }
+        getMovieCast();
     }, [movieId]);
 
     if (!movie) {

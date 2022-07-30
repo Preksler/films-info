@@ -9,11 +9,15 @@ const Reviews = () => {
     const { movieId } = useParams();
 
     useEffect(() => {
-        try {
-            getReviews(movieId).then(movie => setMovie(movie));
-        } catch (error) {
-            console.log(error);
+        async function getMovieReviews() {
+            try {
+                const movie = await getReviews(movieId);
+                setMovie(movie);
+            } catch (error) {
+                console.log(error);
+            }
         }
+        getMovieReviews();
     }, [movieId]);
 
     if (!movie) {

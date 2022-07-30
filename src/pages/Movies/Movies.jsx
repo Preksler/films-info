@@ -8,7 +8,7 @@ const Movies = () => {
     const [movies, setMovies] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [searcParams, setSearchParams] = useSearchParams();
-    const SearchName = searcParams.get('query') ?? "";
+    const SEARCH_NAME = searcParams.get('query') ?? "";
 
     const { search } = useLocation();
 
@@ -16,12 +16,16 @@ const Movies = () => {
         if (!search) {
             return;
         }
-        try {
-            searcMovie(SearchName).then(movies => setMovies(movies));
-        } catch (error) {
-            console.log(error);
+        async function getMovies() {
+            try {
+                const movies = await searcMovie(SEARCH_NAME);
+                setMovies(movies);
+            } catch (error) {
+                console.log(error);
+            }
         }
-    }, [SearchName, search]);
+        getMovies();
+    }, [SEARCH_NAME, search]);
 
     if (!movies) {
         return;
@@ -33,7 +37,15 @@ const Movies = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        searcMovie(searchQuery).then(movies => setMovies(movies));
+        async function getMovies() {
+            try {
+                const movies = await searcMovie(searchQuery);
+                setMovies(movies);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        getMovies();
         setSearchParams({ query: searchQuery });
     }
     

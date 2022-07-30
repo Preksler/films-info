@@ -21,11 +21,15 @@ const MovieInfo = () => {
   const backLinkHref = location.state?.from ?? "/";
 
   useEffect(() => {
-    try {
-      getMovieById(movieId).then(movie => setMovie(movie));
-    } catch (error) {
-      console.log(error);
+    async function getMovie() {
+      try {
+        const movie = await getMovieById(movieId);
+        setMovie(movie);
+      } catch (error) {
+        console.log(error);
+      }
     }
+    getMovie();
   }, [movieId]);
 
   if (!movie) {
