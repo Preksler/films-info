@@ -1,3 +1,4 @@
+import Loader from 'components/Loader/Loader';
 import { useEffect, useState, Suspense } from 'react';
 import { useParams, useLocation, Outlet } from 'react-router-dom';
 import { getMovieById } from 'services/moviesApi';
@@ -42,7 +43,7 @@ const MovieInfo = () => {
         <>
           <BackLink to={backLinkHref}>Go back</BackLink>
           <div>
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<Loader />}>
               <Container>
                 <div>
                   <MovieImage src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} width="300" />
@@ -67,7 +68,7 @@ const MovieInfo = () => {
         </div>
         </>
       )}
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Loader />}>
         <Outlet />
       </Suspense>
     </main>

@@ -23,7 +23,7 @@ const Cast = () => {
     if (!movie) {
         return;
     }
-
+    
     return (
         <Container>
             {movie && (
