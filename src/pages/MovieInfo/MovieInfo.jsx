@@ -61,8 +61,8 @@ const MovieInfo = () => {
             <Wrapper>
               <AdditionalText>Additional information</AdditionalText>
               <AdditionalList>
-                <AdditionalLink to="cast">Cast</AdditionalLink>
-                <AdditionalLink to="reviews">Reviews</AdditionalLink>
+                <AdditionalLink to="cast" state={{from: location.state.from}}>Cast</AdditionalLink>
+                <AdditionalLink to="reviews" state={{from: location.state.from}}>Reviews</AdditionalLink>
               </AdditionalList>
             </Wrapper>
         </div>
