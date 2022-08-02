@@ -28,9 +28,9 @@ const Cast = () => {
         <Container>
             {movie && (
                 <>
-                    {movie.cast.map(cast => (
+                    {movie.cast.slice(0, 10).map(cast => (
                         <CastWrapper key={cast.id}>
-                            {cast.profile_path ? <CastImage src={`https://image.tmdb.org/t/p/w500${cast.profile_path}`} alt={cast.name} /> : <CastImage src={NoPhoto} alt={cast.name} />}
+                            <CastImage src={cast.profile_path ? `https://image.tmdb.org/t/p/w500${cast.profile_path}` : NoPhoto} alt={cast.name} />
                             <CastName>{cast.name}</CastName>
                             {cast.character ? <CastCharacter>{cast.character}</CastCharacter> : <CastCharacter>No character</CastCharacter>}
                         </CastWrapper>

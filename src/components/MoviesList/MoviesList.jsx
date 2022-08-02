@@ -27,6 +27,6 @@ MoviesList.propTypes = {
     movies: PropType.arrayOf(PropType.shape({
         id: PropType.number.isRequired,
         title: PropType.string.isRequired,
-        poster_path: PropType.string.isRequired,
+        poster_path: PropType.string,
     })).isRequired,
 }
