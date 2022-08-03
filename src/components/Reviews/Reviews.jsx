@@ -25,6 +25,20 @@ const Reviews = () => {
         return;
     }
 
+    function getAvatarPatch(avatar) {
+        if (!avatar) {
+            return NoPhoto;
+        }
+        console.log(avatar.length);
+        if (avatar.length > 40) {
+            const avatarImg = avatar.slice(1);
+            return avatarImg;
+        } 
+        if (avatar.length < 40) {
+            return `https://image.tmdb.org/t/p/w500${avatar}`;
+        }
+    }
+
     return (
         <Container>
             {movie.results.length > 0 ? (
@@ -33,7 +47,7 @@ const Reviews = () => {
                     <ReviewWrapper key={review.id}>
                         <AutorName>{review.author}</AutorName>
                         <ContentWrapper>
-                            <Avatar src={review.author_details.avatar_path ? `https://image.tmdb.org/t/p/w500${review.author_details.avatar_path}` : NoPhoto} alt={review.author} />
+                            <Avatar src={getAvatarPatch(review.author_details.avatar_path)} alt={review.author} />
                             <AutorContent>{review.content}</AutorContent>
                         </ContentWrapper>
                     </ReviewWrapper>
