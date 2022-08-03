@@ -29,26 +29,34 @@ const Reviews = () => {
         if (!avatar) {
             return NoPhoto;
         }
-        console.log(avatar.length);
+    
         if (avatar.length > 40) {
             const avatarImg = avatar.slice(1);
             return avatarImg;
         } 
+
         if (avatar.length < 40) {
             return `https://image.tmdb.org/t/p/w500${avatar}`;
         }
+    }
+
+    function readMore(text) {
+        if (text.length > 500) {
+            return text.slice(0, 500) + "...";
+        }
+        return text;
     }
 
     return (
         <Container>
             {movie.results.length > 0 ? (
             <>
-                {movie.results.map(review => (
-                    <ReviewWrapper key={review.id}>
-                        <AutorName>{review.author}</AutorName>
+                {movie.results.map(({ id, author, content, author_details: {avatar_path} }) => (
+                    <ReviewWrapper key={id}>
+                        <AutorName>{author}</AutorName>
                         <ContentWrapper>
-                            <Avatar src={getAvatarPatch(review.author_details.avatar_path)} alt={review.author} />
-                            <AutorContent>{review.content}</AutorContent>
+                            <Avatar src={getAvatarPatch(avatar_path)} alt={author} />
+                            <AutorContent>{readMore(content)}</AutorContent>
                         </ContentWrapper>
                     </ReviewWrapper>
                 ))}

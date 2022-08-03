@@ -11,9 +11,9 @@ export const MoviesList = ({ movies }) => {
                 <CardWrapper key={movie.id}>
                     <Link to={`/movies/${movie.id}`} state={{ from: location }}>
                         {movie.poster_path ? (
-                            <MovieImage src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} width="200" />
+                            <MovieImage src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
                         ) : (
-                            <MovieImage src={NoPoster} alt={movie.title} width="200" />
+                            <MovieImage src={NoPoster} alt={movie.title} />
                         )}
                         <MovieName>{movie.title}</MovieName>
                     </Link>

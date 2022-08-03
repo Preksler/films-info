@@ -38,7 +38,6 @@ export const Avatar = styled.img`
     border-radius: 50%;
     margin-right: 8px;
     object-fit: cover;
-    border: 1px solid rgb(255 69 0);
 `;
 
 export const AutorContent = styled.p`
