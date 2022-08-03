@@ -8,8 +8,9 @@ export const SearchBox = ({ value, onChange }) => {
             autoFocus
             value={value}
             onChange={(e) => onChange(e.target.value)}
+            placeholder="Enter movie title"
         />
-        <Button type="submit">Search</Button>
+        <Button type="submit"><span>Search</span></Button>
     </Wrapper>
   );
 };

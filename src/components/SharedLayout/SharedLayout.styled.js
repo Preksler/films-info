@@ -39,18 +39,61 @@ export const LogoLink = styled(Link)`
 `;
 
 export const LinkNav = styled(NavLink)`
+    position: relative;
     padding: 8px 16px;
+    border: 2px solid rgb(255 69 0);
     border-radius: 4px;
+    color: rgb(255 69 0);
+    background-color: transparent;
+    cursor: pointer;
+    margin-right: 16px;
     text-decoration: none;
-    color: black;
-    font-weight: 500;
 
-    &.active {
-        color: white;
-        background-color: orangered;
+    :last-child {
+        margin-right: 0;
     }
 
-    :hover:not(.active) {
-        color: orangered;
+    & > span {
+        position: relative;
+        font-size: 16px;
+        font-weight: 700;
+        z-index: 3;
+    }
+
+    &.active {
+        border: 2px solid orangered;
+    }
+
+    :not(.active)::before {
+        content: "";
+        position: absolute;
+        top: 6px;
+        left: -3px;
+        width: calc(100% + 6px);
+        height: calc(100% - 12px);
+        background-color: #fff;
+        transition: 0.3s ease-in-out;
+        transform: scaleY(1);
+        transition-delay: 0.3s;
+    }
+
+    :hover::before {
+        transform: scaleY(0);
+    }
+
+    :not(.active)::after {
+        content: "";
+        position: absolute;
+        top: -3px;
+        left: 6px;
+        width: calc(100% - 12px);
+        height: calc(100% + 6px);
+        background-color: #fff;
+        transition: 0.3s ease-in-out;
+        transform: scaleX(1);
+    }
+
+    :hover::after {
+        transform: scaleX(0);
     }
 `;
