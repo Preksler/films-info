@@ -11,20 +11,11 @@ const Movies = () => {
     const [movies, setMovies] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [loading, setLoading] = useState(false);
-    const [page, setPage] = useState(1);
     const [searchParams, setSearchParams] = useSearchParams();
     const SEARCH_NAME = searchParams.get('query') ?? "";
-
-
-
-        //     const params = useMemo(
-        // () => Object.fromEntries([...searchParams]),
-        // [searchParams]
-        // );
-        // const { query, page } = params;
-
-
-
+    const PAGE_NUMBER = searchParams.get('page') ?? 1;
+    const [page, setPage] = useState(PAGE_NUMBER);
+    const CARD_HEIGHT = 342;
 
     const { search } = useLocation();
 
@@ -35,8 +26,8 @@ const Movies = () => {
         async function getMovies() {
             setLoading(true);
             try {
-                const movies = await searcMovie(SEARCH_NAME, page);
-                if (page === 1) {
+                const movies = await searcMovie(SEARCH_NAME, PAGE_NUMBER);
+                if (Number(PAGE_NUMBER) === 1) {
                     setMovies(movies.results);
                 } else {
                     setMovies((prevMovies) => [...prevMovies, ...movies.results]);
@@ -47,7 +38,16 @@ const Movies = () => {
             }
         }
         getMovies();
-    }, [SEARCH_NAME, page, search]);
+    }, [SEARCH_NAME, PAGE_NUMBER, search]);
+
+    useEffect(() => {
+        if (movies.length > 0 && Number(page) > 1) {
+            window.scrollBy({
+                top: CARD_HEIGHT * 2,
+                behavior: "smooth"
+            });
+        }
+    }, [movies.length, page]);
 
     if (!movies) {
         return;
@@ -55,6 +55,7 @@ const Movies = () => {
 
      const onLoadMore = () => {
         setPage(page => page + 1);
+        setSearchParams({ query: SEARCH_NAME, page: Number(page) + 1 });
     }
 
     const handleInputChange = (query) => {
